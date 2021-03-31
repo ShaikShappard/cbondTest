@@ -11,21 +11,37 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     @yield('styles')
 </head>
-<body>
+<body id="bodyCbondsMain">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-    <a class="navbar-brand" href="{{ route('index') }}">@yield('title')</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</nav>
+<div id="app">
+    <div id="header" class="header">
+        <div class="wrapper">
+            <div class="main_menu js_main_menu">
+                <ul class="list">
+                    <li class="main_item">
+                        <a href="{{ route('index') }}" class="item">Главная</a>
+                    </li>
+                    @if (empty($auth))
+                    <li class="main_item">
+                        <a href="{{ route('auth') }}" class="item">Вы неавторизованы [Войти]</a>
+                    </li>
+                    @else
+                    <li class="main_item auth">
+                        <a href="{{ route('logout') }}" class="item">Вы авторизованы [Выйти]</a>
+                    </li>
+                    @endif
+                </ul>
+            </div>
+        </div>
+    </div>
 
-<div class="container mt-3" id="app">
-    @yield('content')
+    <div class="container mt-3">
+        @yield('content')
+    </div>
 </div>
-
-
+<script>
+    var labels = {};
+</script>
 <script src="{{ mix('/js/app.js') }}"></script>
 @stack('scripts')
 

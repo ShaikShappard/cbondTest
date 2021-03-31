@@ -3,38 +3,46 @@
 @section('title', 'Тестовое задание CBONDS')
 
 @section('content')
+    <div class="wrapper_content">
+        <div class="content_scroll">
+            <div class="content">
+                <div class="content_header">
+                    <h2 class="content_ttl">Новая запись</h2>
+                </div>
+                <div class="infoUser">
+                    <div class="field" v-for="field in tableFields" v-bind:id="field" v-if="field != 'action'">
+                        <div class="lbl indent">@{{ !!labels[field] ? labels[field] : field }}</div>
+                        <div class="fld">
+                            <input type="text" class="input" v-model="newItem[field]"/>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                    <a href="#" @click="appendRow()" class="btn_green top_10">Добавить</a>
+                </div>
+                <div class="content_header top_20">
+                    <h2 class="content_ttl">Таблица с данными</h2>
+                </div>
+                <div v-if="tableData.length">
+                    <app-table-new
+                        :data="tableData"
+                        :fields="tableFields"
+                        :fields_labels="labels"
+                        :no_hidden_empty_cols="true"
+                    >
+                        <template slot="field" slot-scope="props">
+                            <div v-if="props.field == 'action'">
+                               <a href="#" @click="removeRow(props.row.id)">Удалить</a>
+                            </div>
+                        </template>
+                    </app-table-new>
 
-    <div class="container mainpage">
-        <div class="content">
+                    <a href="{{ route('export') }}" class="btn_blue top_10">Экспорт в Excel</a>
+                </div>
+                <div v-else>
+                    Нет данных, необходимо добавить
+                </div>
 
-            <div class="row">
-                Существует таблица products полями id, name, priсе. Необходимо реализовать ее отображение со следующим функционалом:
-            </div>
-
-            <div class="row">
-                <ul>
-                    <li>Фильтрация по полю name</li>
-                    <li>Пагинация по 25 записей на странице</li>
-                    <li>Добавление новой записи</li>
-                    <li>Редактирование записи</li>
-                    <li>Удаление записи</li>
-                </ul>
-            </div>
-
-            <div class="row">
-                Вывод данных и выполнение операций необходимо осуществлять без перезагрузки страницы с использованием vue.js.
-            </div>
-
-            <div class="row">
-                Необходимая модель Product и миграция с фабрикой уже созданы. Используемая база данных не имеет значения (можно использовать как mysql так и sqlite).
-            </div>
-
-            <div class="row">
-                Также уже создан контроллер TestController, где можно размещать необходимый функционал. Необходимо создать сервисный слой и организовать валидацию данных.
-            </div>
-
-            <div class="row">
-                Полученный результ можно прислать архивом по почте, выложить в облако или в своем репозитории.
             </div>
         </div>
     </div>
