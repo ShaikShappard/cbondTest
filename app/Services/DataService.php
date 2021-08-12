@@ -9,6 +9,10 @@ class DataService
     }
     public function set($data)
     {
-        session(['data' => $data]);
+        $data = collect($data)->filter(function ($value, $key) {
+            return $value['name'] != 'Итого';
+        });
+
+        session(['data' => $data->all()]);
     }
 }

@@ -9,47 +9,65 @@
                         <th>
                             <div v-bind:style="{height: heightH}">
                                 <span v-if="number" class="number">№</span>
-                                <a v-if="sort_fields.indexOf(columns[0]) != -1" href="javascript:void(0);" class="sortable" v-on:click="sortByField(columns[0])">
-                                    <slot name="header" :field="columns[0]" :value="header[columns[0]]" :row="header"><span v-html="header[columns[0]]"></span></slot>
+                                <a v-if="sort_fields.indexOf(columns[0]) != -1" href="javascript:void(0);"
+                                   class="sortable" v-on:click="sortByField(columns[0])">
+                                    <slot name="header" :field="columns[0]" :value="header[columns[0]]" :row="header">
+                                        <span v-html="header[columns[0]]"></span></slot>
                                     <span v-if="columns[0] == sort_field && sort_order == 'asc'">▲</span>
                                     <span v-if="columns[0] == sort_field && sort_order == 'desc'">▼</span>
                                 </a>
-                                <slot v-else name="header" :field="columns[0]" :value="header[columns[0]]" :row="header"><span v-html="header[columns[0]]"></span></slot>
+                                <slot v-else name="header" :field="columns[0]" :value="header[columns[0]]"
+                                      :row="header"><span v-html="header[columns[0]]"></span></slot>
                             </div>
                         </th>
                     </tr>
                     </thead>
                 </table>
             </div>
-            <div ref="fixedHeadTableRight" class="fixedHeadTableRight" v-bind:style="{width: widthFixedHeadTableRight}" v-bind:class="{fieldLR:showAdaptive}">
-                <a href="javascript:void(0);" class="arrow_left adaptive" v-if="index > 1"  v-on:click="scrollTableLeft()"></a>
-                <a href="javascript:void(0);" class="arrow_right adaptive" v-if="index < countActiveColumn" v-on:click="scrollTableRight()"></a>
-                <table class="table" v-bind:style="{'margin-left': indent + 'px'}" border="0" cellpadding="0" cellspacing="0">
+            <div ref="fixedHeadTableRight" class="fixedHeadTableRight" v-bind:style="{width: widthFixedHeadTableRight}"
+                 v-bind:class="{fieldLR:showAdaptive}">
+                <a href="javascript:void(0);" class="arrow_left adaptive" v-if="index > 1"
+                   v-on:click="scrollTableLeft()"></a>
+                <a href="javascript:void(0);" class="arrow_right adaptive" v-if="index < countActiveColumn"
+                   v-on:click="scrollTableRight()"></a>
+                <table class="table" v-bind:style="{'margin-left': indent + 'px'}" border="0" cellpadding="0"
+                       cellspacing="0">
                     <thead>
                     <tr>
-                        <th v-if="number && !showAdaptive"><div v-bind:style="{width: forFixedThN, height: heightH}">№</div></th>
+                        <th v-if="number && !showAdaptive">
+                            <div v-bind:style="{width: forFixedThN, height: heightH}">№</div>
+                        </th>
                         <th v-bind:class="{center_txt:arrow_adaptive}" v-if="!showAdaptive">
                             <div v-bind:style="{width: forFixedThF, height: heightH}">
-                                <a v-if="sort_fields.indexOf(columns[0]) != -1" href="javascript:void(0);" class="sortable" v-on:click="sortByField(columns[0])">
-                                    <slot name="header" :field="columns[0]" :value="header[columns[0]]" :row="header"><span v-html="header[columns[0]]"></span></slot>
+                                <a v-if="sort_fields.indexOf(columns[0]) != -1" href="javascript:void(0);"
+                                   class="sortable" v-on:click="sortByField(columns[0])">
+                                    <slot name="header" :field="columns[0]" :value="header[columns[0]]" :row="header">
+                                        <span v-html="header[columns[0]]"></span></slot>
                                     <span v-if="columns[0] == sort_field && sort_order == 'asc'">▲</span>
                                     <span v-if="columns[0] == sort_field && sort_order == 'desc'">▼</span>
                                 </a>
-                                <slot v-else name="header" :field="columns[0]" :value="header[columns[0]]" :row="header"><span v-html="header[columns[0]]"></span></slot>
+                                <slot v-else name="header" :field="columns[0]" :value="header[columns[0]]"
+                                      :row="header"><span v-html="header[columns[0]]"></span></slot>
                             </div>
                         </th>
-                        <th v-for="(key, index) in columns" v-bind:class="[{center_txt:arrow_adaptive}, 'field_' + key]" v-if="index > 0">
+                        <th v-for="(key, index) in columns" v-bind:class="[{center_txt:arrow_adaptive}, 'field_' + key]"
+                            v-if="index > 0">
                             <div v-bind:style="{width: forFixedTh[index], height: heightH}">
-                                <a v-if="sort_fields.indexOf(key) != -1" href="javascript:void(0);" class="sortable" v-on:click="sortByField(key)">
-                                    <slot name="header" :field="key" :value="header[key]" :row="header"><span v-html="header[key]"></span></slot>
+                                <a v-if="sort_fields.indexOf(key) != -1" href="javascript:void(0);" class="sortable"
+                                   v-on:click="sortByField(key)">
+                                    <slot name="header" :field="key" :value="header[key]" :row="header"><span
+                                        v-html="header[key]"></span></slot>
                                     <span v-if="key == sort_field && sort_order == 'asc'">▲</span>
                                     <span v-if="key == sort_field && sort_order == 'desc'">▼</span>
                                 </a>
-                                <slot v-else name="header" :field="key" :value="header[key]" :row="header"><span v-html="header[key]"></span></slot>
+                                <slot v-else name="header" :field="key" :value="header[key]" :row="header"><span
+                                    v-html="header[key]"></span></slot>
                             </div>
                         </th>
                         <template v-if="group && showAdaptive && prestrings[index]">
-                            <th><div v-bind:style="{width: forFixedThG, height: heightH}">&nbsp;</div></th>
+                            <th>
+                                <div v-bind:style="{width: forFixedThG, height: heightH}">&nbsp;</div>
+                            </th>
                         </template>
                     </tr>
                     </thead>
@@ -64,12 +82,15 @@
                     <th>
                         <div v-bind:style="{height: heightH}">
                             <span v-if="number" class="number">№</span>
-                            <a v-if="sort_fields.indexOf(columns[0]) != -1" href="javascript:void(0);" class="sortable" v-on:click="sortByField(columns[0])">
-                                <slot name="header" :field="columns[0]" :value="header[columns[0]]" :row="header"><span v-html="header[columns[0]]"></span></slot>
+                            <a v-if="sort_fields.indexOf(columns[0]) != -1" href="javascript:void(0);" class="sortable"
+                               v-on:click="sortByField(columns[0])">
+                                <slot name="header" :field="columns[0]" :value="header[columns[0]]" :row="header"><span
+                                    v-html="header[columns[0]]"></span></slot>
                                 <span v-if="columns[0] == sort_field && sort_order == 'asc'">▲</span>
                                 <span v-if="columns[0] == sort_field && sort_order == 'desc'">▼</span>
                             </a>
-                            <slot v-else name="header" :field="columns[0]" :value="header[columns[0]]" :row="header"><span v-html="header[columns[0]]"></span></slot>
+                            <slot v-else name="header" :field="columns[0]" :value="header[columns[0]]" :row="header">
+                                <span v-html="header[columns[0]]"></span></slot>
                         </div>
                     </th>
                 </tr>
@@ -78,7 +99,8 @@
                 <tr v-if="prev && showAdaptive" class="openOther" ref="trFixedBodyGroupPr">
                     <td>
                         <div v-bind:style="{height: heightBGPr}">
-                            <a href="javascript:void(0);" v-on:click="showPrev" v-bind:class="{show_hide_block:prevInner, hide_hide_block:!prevInner}">
+                            <a href="javascript:void(0);" v-on:click="showPrev"
+                               v-bind:class="{show_hide_block:prevInner, hide_hide_block:!prevInner}">
                                 <template v-if="!prevInner">{{ getLabel('link_show_prevs') }}</template>
                                 <template v-if="prevInner">{{ getLabel('hide') }}</template>
                             </a>
@@ -87,41 +109,57 @@
                 </tr>
                 <template v-for="(item, index) in body">
                     <template v-if="index < innerLimit">
-                        <tr :key="'trFixedBodyPrestrings' + index" v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]" v-if="prestrings[index]" ref="trFixedBodyPrestrings"  v-on:click="setActiveColor(item)">
+                        <tr :key="'trFixedBodyPrestrings' + index"
+                            v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]"
+                            v-if="prestrings[index]" ref="trFixedBodyPrestrings" v-on:click="setActiveColor(item)">
                             <td class="small_txt" v-bind:class="{group_tr:collapse}">
                                 <div v-if="collapse" v-bind:style="{height: heightBP[index]}">
-                                    <a href="javascript:void(0);" class="group show_hide_block" v-on:click.prevent="switchGroupList(index)" v-html="prestrings[index]"></a>
+                                    <a href="javascript:void(0);" class="group show_hide_block"
+                                       v-on:click.prevent="switchGroupList(index)" v-html="prestrings[index]"></a>
                                 </div>
                                 <div v-else v-bind:style="{height: heightBP[index]}" v-html="prestrings[index]"></div>
                             </td>
                         </tr>
                         <template v-if="collapse">
-                            <tr :id="table_name +'_fixed_item_' + index" :key="'fixed_' + index" v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]" ref="trFixedBody" v-show="showTr(item.show) && item.show_group"  v-on:click="setActiveColor(item)">
+                            <tr :id="table_name +'_fixed_item_' + index" :key="'fixed_' + index"
+                                v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]"
+                                ref="trFixedBody" v-show="showTr(item.show) && item.show_group"
+                                v-on:click="setActiveColor(item)">
                                 <td>
                                     <div v-bind:style="{height: heightB[index]}">
                                         <span v-if="number" class="number">{{index + 1}}</span>
-                                        <a v-bind:href="item.data[columns[0]].lnk" v-if="!!item.data[columns[0]] && typeof(item.data[columns[0]]) === 'object'" target="_blank" v-html="item.data[columns[0]].ttl"></a>
+                                        <a v-bind:href="item.data[columns[0]].lnk"
+                                           v-if="!!item.data[columns[0]] && typeof(item.data[columns[0]]) === 'object'"
+                                           target="_blank" v-html="item.data[columns[0]].ttl"></a>
                                         <template v-else>
                                             <template v-if="getAsterisks(item.data[columns[0]])">
-                                                <app-asterisks :message="getAsterisksMessage(item.data[columns[0]])"></app-asterisks>
+                                                <app-asterisks
+                                                    :message="getAsterisksMessage(item.data[columns[0]])"></app-asterisks>
                                             </template>
-                                            <slot v-else name="field" :field="columns[0]" :value="item.data[columns[0]]" :row="item.data"><span v-html="item.data[columns[0]]"></span></slot>
+                                            <slot v-else name="field" :field="columns[0]" :value="item.data[columns[0]]"
+                                                  :row="item.data"><span v-html="item.data[columns[0]]"></span></slot>
                                         </template>
                                     </div>
                                 </td>
                             </tr>
                         </template>
                         <template v-else>
-                            <tr :id="table_name + '_fixed_item_' + index" :key="'fixed_' + index" v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]" ref="trFixedBody" v-show="showTr(item.show)"  v-on:click="setActiveColor(item)">
+                            <tr :id="table_name + '_fixed_item_' + index" :key="'fixed_' + index"
+                                v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]"
+                                ref="trFixedBody" v-show="showTr(item.show)" v-on:click="setActiveColor(item)">
                                 <td>
                                     <div v-bind:style="{height: heightB[index]}">
                                         <span v-if="number" class="number">{{index + 1}}</span>
-                                        <a v-bind:href="item.data[columns[0]].lnk" v-if="!!item.data[columns[0]] && typeof(item.data[columns[0]]) === 'object'" target="_blank" v-html="item.data[columns[0]].ttl"></a>
+                                        <a v-bind:href="item.data[columns[0]].lnk"
+                                           v-if="!!item.data[columns[0]] && typeof(item.data[columns[0]]) === 'object'"
+                                           target="_blank" v-html="item.data[columns[0]].ttl"></a>
                                         <template v-else>
                                             <template v-if="getAsterisks(item.data[columns[0]])">
-                                                <app-asterisks :message="getAsterisksMessage(item.data[columns[0]])"></app-asterisks>
+                                                <app-asterisks
+                                                    :message="getAsterisksMessage(item.data[columns[0]])"></app-asterisks>
                                             </template>
-                                            <slot v-else name="field" :field="columns[0]" :value="item.data[columns[0]]" :row="item.data"><span v-html="item.data[columns[0]]"></span></slot>
+                                            <slot v-else name="field" :field="columns[0]" :value="item.data[columns[0]]"
+                                                  :row="item.data"><span v-html="item.data[columns[0]]"></span></slot>
                                         </template>
                                     </div>
                                 </td>
@@ -129,41 +167,58 @@
                         </template>
                     </template>
                     <template v-else>
-                        <tr :key="'trFixedBodyPrestrings' + index" v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]" v-if="prestrings[index]" ref="trFixedBodyPrestrings"  v-on:click="setActiveColor(item)">
+                        <tr :key="'trFixedBodyPrestrings' + index"
+                            v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]"
+                            v-if="prestrings[index]" ref="trFixedBodyPrestrings" v-on:click="setActiveColor(item)">
                             <td class="small_txt">
                                 <div v-if="collapse" v-bind:style="{height: heightBP[index]}">
-                                    <a href="javascript:void(0);" class="group show_hide_block" v-on:click.prevent="switchGroupList(index)" v-html="prestrings[index]"></a>
+                                    <a href="javascript:void(0);" class="group show_hide_block"
+                                       v-on:click.prevent="switchGroupList(index)" v-html="prestrings[index]"></a>
                                 </div>
                                 <div v-else v-bind:style="{height: heightBP[index]}" v-html="prestrings[index]"></div>
                             </td>
                         </tr>
                         <template v-if="collapse">
-                            <tr :id="table_name + '_fixed_item_' + index" :key="'trFixedBody' + index" v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]" ref="trFixedBody" v-show="showTr(item.show) && show_tr && item.show_group"  v-on:click="setActiveColor(item)">
+                            <tr :id="table_name + '_fixed_item_' + index" :key="'trFixedBody' + index"
+                                v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]"
+                                ref="trFixedBody" v-show="showTr(item.show) && show_tr && item.show_group"
+                                v-on:click="setActiveColor(item)">
                                 <td>
                                     <div v-bind:style="{height: heightB[index]}">
                                         <span v-if="number" class="number">{{index + 1}}</span>
-                                        <a v-bind:href="item.data[columns[0]].lnk" v-if="!!item.data[columns[0]] && typeof(item.data[columns[0]]) === 'object'" target="_blank" v-html="item.data[columns[0]].ttl"></a>
+                                        <a v-bind:href="item.data[columns[0]].lnk"
+                                           v-if="!!item.data[columns[0]] && typeof(item.data[columns[0]]) === 'object'"
+                                           target="_blank" v-html="item.data[columns[0]].ttl"></a>
                                         <template v-else>
                                             <template v-if="getAsterisks(item.data[columns[0]])">
-                                                <app-asterisks :message="getAsterisksMessage(item.data[columns[0]])"></app-asterisks>
+                                                <app-asterisks
+                                                    :message="getAsterisksMessage(item.data[columns[0]])"></app-asterisks>
                                             </template>
-                                            <slot v-else name="field" :field="columns[0]" :value="item.data[columns[0]]" :row="item.data"><span v-html="item.data[columns[0]]"></span></slot>
+                                            <slot v-else name="field" :field="columns[0]" :value="item.data[columns[0]]"
+                                                  :row="item.data"><span v-html="item.data[columns[0]]"></span></slot>
                                         </template>
                                     </div>
                                 </td>
                             </tr>
                         </template>
                         <template v-else>
-                            <tr :id="table_name + '_fixed_item_' + index" :key="'trFixedBody' + index" v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]" ref="trFixedBody" v-show="showTr(item.show) && show_tr"  v-on:click="setActiveColor(item)">
+                            <tr :id="table_name + '_fixed_item_' + index" :key="'trFixedBody' + index"
+                                v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]"
+                                ref="trFixedBody" v-show="showTr(item.show) && show_tr"
+                                v-on:click="setActiveColor(item)">
                                 <td>
                                     <div v-bind:style="{height: heightB[index]}">
                                         <span v-if="number" class="number">{{index + 1}}</span>
-                                        <a v-bind:href="item.data[columns[0]].lnk" v-if="!!item.data[columns[0]] && typeof(item.data[columns[0]]) === 'object'" target="_blank" v-html="item.data[columns[0]].ttl"></a>
+                                        <a v-bind:href="item.data[columns[0]].lnk"
+                                           v-if="!!item.data[columns[0]] && typeof(item.data[columns[0]]) === 'object'"
+                                           target="_blank" v-html="item.data[columns[0]].ttl"></a>
                                         <template v-else>
                                             <template v-if="getAsterisks(item.data[columns[0]])">
-                                                <app-asterisks :message="getAsterisksMessage(item.data[columns[0]])"></app-asterisks>
+                                                <app-asterisks
+                                                    :message="getAsterisksMessage(item.data[columns[0]])"></app-asterisks>
                                             </template>
-                                            <slot v-else name="field" :field="columns[0]" :value="item.data[columns[0]]" :row="item.data"><span v-html="item.data[columns[0]]"></span></slot>
+                                            <slot v-else name="field" :field="columns[0]" :value="item.data[columns[0]]"
+                                                  :row="item.data"><span v-html="item.data[columns[0]]"></span></slot>
                                         </template>
                                     </div>
                                 </td>
@@ -174,7 +229,8 @@
                 <tr v-if="next && showAdaptive" class="openOther" ref="trFixedBodyGroupNx">
                     <td>
                         <div v-bind:style="{height: heightBGNx}">
-                            <a href="javascript:void(0);" v-on:click="showNext" v-bind:class="{show_hide_block:!nextInner, hide_hide_block:nextInner}">
+                            <a href="javascript:void(0);" v-on:click="showNext"
+                               v-bind:class="{show_hide_block:!nextInner, hide_hide_block:nextInner}">
                                 <template v-if="!nextInner">{{ getLabel('link_show_nexts') }}</template>
                                 <template v-if="nextInner">{{ getLabel('hide') }}</template>
                             </a>
@@ -184,128 +240,374 @@
                 </tbody>
             </table>
         </div>
-        <a href="javascript:void(0);" class="arrow_right_screen" v-bind:class="{arrow_right_screen_multy:arrow_multy}" v-if="arrow_screen && arrow_screen_right" v-on:mousedown="startScrollR" v-on:mouseleave="stopScroll" v-on:mouseup="stopScroll" v-on:touchstart="startScrollR" v-on:touchend="stopScroll" v-bind:style="{top: heightH, height: height_body + 'px'}"></a>
-        <a href="javascript:void(0);" class="arrow_left_screen" v-if="arrow_screen && arrow_screen_left" v-bind:class="{arrow_left_screen_multy:arrow_multy}" v-on:mousedown="startScrollL" v-on:mouseleave="stopScroll" v-on:mouseup="stopScroll" v-on:touchstart="startScrollL" v-on:touchend="stopScroll" v-bind:style="{top: heightH, height: height_body + 'px'}"></a>
-        <a href="javascript:void(0);" class="arrow_left adaptive" v-if="arrow_adaptive && index > 1" v-on:click="scrollTableLeft"></a>
-        <a href="javascript:void(0);" class="arrow_right adaptive" v-if="arrow_adaptive && index < countActiveColumn" v-on:click="scrollTableRight"></a>
+        <a href="javascript:void(0);" class="arrow_right_screen" v-bind:class="{arrow_right_screen_multy:arrow_multy}"
+           v-if="arrow_screen && arrow_screen_right" v-on:mousedown="startScrollR" v-on:mouseleave="stopScroll"
+           v-on:mouseup="stopScroll" v-on:touchstart="startScrollR" v-on:touchend="stopScroll"
+           v-bind:style="{top: heightH, height: height_body + 'px'}"></a>
+        <a href="javascript:void(0);" class="arrow_left_screen" v-if="arrow_screen && arrow_screen_left"
+           v-bind:class="{arrow_left_screen_multy:arrow_multy}" v-on:mousedown="startScrollL"
+           v-on:mouseleave="stopScroll" v-on:mouseup="stopScroll" v-on:touchstart="startScrollL"
+           v-on:touchend="stopScroll" v-bind:style="{top: heightH, height: height_body + 'px'}"></a>
+        <a href="javascript:void(0);" class="arrow_left adaptive" v-if="arrow_adaptive && index > 1"
+           v-on:click="scrollTableLeft"></a>
+        <a href="javascript:void(0);" class="arrow_right adaptive" v-if="arrow_adaptive && index < countActiveColumn"
+           v-on:click="scrollTableRight"></a>
         <div v-bind:class="{roll_table: showAdaptive}" v-bind:style="{width: widthScreen}" ref="table_wrapper">
-            <table ref="table_scroll" class="table full" v-bind:class="{indent:arrow_screen}" v-bind:style="{width: widthFull, 'margin-left': indent + 'px'}" border="0" cellpadding="0" cellspacing="0">
-            <thead>
+            <table ref="table_scroll" class="table full" v-bind:class="{indent:arrow_screen}"
+                   v-bind:style="{width: widthFull, 'margin-left': indent + 'px'}" border="0" cellpadding="0"
+                   cellspacing="0">
+                <thead>
                 <tr ref="trScrollHead">
-                    <th ref="width_th_scroll_number" v-if="number && !showAdaptive"><div v-bind:style="{height: heightH}">№</div></th>
+                    <th ref="width_th_scroll_number" v-if="number && !showAdaptive">
+                        <div v-bind:style="{height: heightH}">№</div>
+                    </th>
                     <th ref="width_th_scroll_first" v-bind:class="{center_txt:arrow_adaptive}" v-if="!showAdaptive">
                         <div v-bind:style="{width: width, height: heightH}">
-                            <a v-if="sort_fields.indexOf(columns[0]) != -1" href="javascript:void(0);" class="sortable" v-on:click="sortByField(columns[0])">
-                                <slot name="header" :field="columns[0]" :value="header[columns[0]]" :row="header"><span v-html="header[columns[0]]"></span></slot>
+                            <a v-if="sort_fields.indexOf(columns[0]) != -1" href="javascript:void(0);" class="sortable"
+                               v-on:click="sortByField(columns[0])">
+                                <slot name="header" :field="columns[0]" :value="header[columns[0]]" :row="header"><span
+                                    v-html="header[columns[0]]"></span></slot>
                                 <span v-if="columns[0] == sort_field && sort_order == 'asc'">▲</span>
                                 <span v-if="columns[0] == sort_field && sort_order == 'desc'">▼</span>
                             </a>
-                            <slot v-else name="header" :field="columns[0]" :value="header[columns[0]]" :row="header"><span v-html="header[columns[0]]"></span></slot>
+                            <slot v-else name="header" :field="columns[0]" :value="header[columns[0]]" :row="header">
+                                <span v-html="header[columns[0]]"></span></slot>
                         </div>
                     </th>
-                    <th ref="width_th_scroll" v-for="(key, index) in columns" v-bind:class="[(arrow_adaptive ? 'center_txt' : ''), 'field_' + key]" v-if="index > 0">
+                    <th ref="width_th_scroll" v-for="(key, index) in columns"
+                        v-bind:class="[(arrow_adaptive ? 'center_txt' : ''), 'field_' + key]" v-if="index > 0">
                         <div v-bind:style="{width: width, height: heightH}">
-                            <a v-if="sort_fields.indexOf(key) != -1" href="javascript:void(0);" class="sortable" v-on:click="sortByField(key)">
-                                <slot name="header" :field="key" :value="header[key]" :row="header"><span v-html="header[key]"></span></slot>
+                            <a v-if="sort_fields.indexOf(key) != -1" href="javascript:void(0);" class="sortable"
+                               v-on:click="sortByField(key)">
+                                <slot name="header" :field="key" :value="header[key]" :row="header"><span
+                                    v-html="header[key]"></span></slot>
                                 <span v-if="key == sort_field && sort_order == 'asc'">▲</span>
                                 <span v-if="key == sort_field && sort_order == 'desc'">▼</span>
                             </a>
-                            <slot v-else name="header" :field="key" :value="header[key]" :row="header"><span v-html="header[key]"></span></slot>
+                            <slot v-else name="header" :field="key" :value="header[key]" :row="header"><span
+                                v-html="header[key]"></span></slot>
                         </div>
                     </th>
                     <template v-if="group && showAdaptive && substrings.length > 0  && !prestrings[index]">
-                        <th ref="width_th_scroll_group"><div v-bind:style="{width: width, height: heightH}">&nbsp;</div></th>
+                        <th ref="width_th_scroll_group">
+                            <div v-bind:style="{width: width, height: heightH}">&nbsp;</div>
+                        </th>
                     </template>
                 </tr>
-            </thead>
-            <tbody>
-            <tr v-show="prev" class="openOther">
-                <td v-bind:colspan="colspan" class="center_txt">
-                    <div v-bind:style="{height: heightBGPr}">
-                        <a href="javascript:void(0);" v-on:click="showPrev" v-bind:class="{show_hide_block:prevInner, hide_hide_block:!prevInner}" v-if="!showAdaptive">
-                            <template v-if="!prevInner">{{ getLabel('link_show_prevs') }}</template>
-                            <template v-if="prevInner">{{ getLabel('hide') }}</template>
-                        </a>
-                    </div>
-                </td>
-            </tr>
-            <template v-for="(item, index) in body">
-                <template v-if="index < innerLimit">
-                    <tr v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]" v-if="prestrings[index] && !showAdaptive" v-on:click="setActiveColor(item)">
+                </thead>
+                <tbody>
+                <tr v-show="prev" class="openOther">
+                    <td v-bind:colspan="colspan" class="center_txt">
+                        <div v-bind:style="{height: heightBGPr}">
+                            <a href="javascript:void(0);" v-on:click="showPrev"
+                               v-bind:class="{show_hide_block:prevInner, hide_hide_block:!prevInner}"
+                               v-if="!showAdaptive">
+                                <template v-if="!prevInner">{{ getLabel('link_show_prevs') }}</template>
+                                <template v-if="prevInner">{{ getLabel('hide') }}</template>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                <template v-for="(item, index) in body">
+                    <template v-if="index < (innerLimit )">
+                        <tr v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]"
+                            v-if="prestrings[index] && !showAdaptive" v-on:click="setActiveColor(item)">
+                            <template v-if="collapse">
+                                <td v-bind:colspan="colspan" class="group_tr">
+                                    <div v-bind:style="{height: heightBP[index]}">
+                                        <a href="javascript:void(0);" class="group show_hide_block"
+                                           v-on:click.prevent="switchGroupList(index)" v-html="prestrings[index]"></a>
+                                    </div>
+                                </td>
+                            </template>
+                            <template v-else>
+                                <td v-bind:colspan="colspan" class="small_txt 2" v-html="prestrings[index]"></td>
+                            </template>
+                        </tr>
+                        <tr v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]"
+                            v-if="prestrings[index] && showAdaptive" v-on:click="setActiveColor(item)">
+                            <template v-if="collapse">
+                                <td v-bind:colspan="colspan" class="group_tr" v-if="columns.length > 1">
+                                    <div v-bind:style="{width: width, height: heightBP[index]}"></div>
+                                </td>
+                            </template>
+                            <template v-else>
+                                <td v-bind:colspan="colspan" class="small_txt">
+                                    <div v-bind:style="{width: width, height: heightBP[index]}"></div>
+                                </td>
+                            </template>
+                        </tr>
                         <template v-if="collapse">
-                            <td v-bind:colspan="colspan" class="group_tr">
-                                <div v-bind:style="{height: heightBP[index]}">
-                                    <a href="javascript:void(0);" class="group show_hide_block" v-on:click.prevent="switchGroupList(index)" v-html="prestrings[index]"></a>
-                                </div>
-                            </td>
+                            <tr :id="table_name + '_scroll_item_' + index" :key="'trScrollBody' + index"
+                                v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]"
+                                v-if="showPreviousElements(index)" ref="trScrollBody"
+                                v-show="showTr(item.show)  && item.show_group" v-on:click="setActiveColor(item)">
+                                <td v-if="number && !showAdaptive">{{index + 1}}</td>
+                                <td v-bind:class="{center_txt:arrow_adaptive}" v-if="!showAdaptive">
+                                    <div v-bind:style="{width: width, height: heightB[0]}">
+                                        <template
+                                            v-if="!!item.data[columns[0]] && typeof(item.data[columns[0]]) === 'object'">
+                                            <a v-if="item.data[columns[0]].lnk" v-bind:href="item.data[columns[0]].lnk"
+                                               target="_blank" v-html="item.data[columns[0]].ttl"></a>
+                                            <template v-else>
+                                                <template v-if="getAsterisks(item.data[columns[0]].ttl)">
+                                                    <app-asterisks></app-asterisks>
+                                                </template>
+                                                <slot v-else name="field" :field="columns[0]"
+                                                      :value="item.data[columns[0]].ttl" :row="item.data"><span
+                                                    v-html="item.data[columns[0]].ttl"></span></slot>
+                                            </template>
+                                            <div class="small" v-if="item.data[columns[0]].info"
+                                                 v-html="item.data[columns[0]].info"></div>
+                                        </template>
+                                        <template v-else>
+                                            <template v-if="getAsterisks(item.data[columns[0]])">
+                                                <app-asterisks
+                                                    :message="getAsterisksMessage(item.data[columns[0]])"></app-asterisks>
+                                            </template>
+                                            <slot v-else name="field" :field="columns[0]" :value="item.data[columns[0]]"
+                                                  :row="item.data"><span v-html="item.data[columns[0]]"></span></slot>
+                                        </template>
+                                    </div>
+                                </td>
+                                <td v-for="(key, indexInner) in columns"
+                                    v-bind:class="[(arrow_adaptive ? 'center_txt' : ''), 'field_' + key]"
+                                    v-if="indexInner > 0">
+                                    <div v-bind:style="{width: width, height: heightB[index]}"
+                                         v-bind:title="getTitle(item.data[key])">
+                                        <template v-if="!!item.data[key] && typeof(item.data[key]) === 'object'">
+                                            <a v-if="item.data[key].lnk" v-bind:href="item.data[key].lnk"
+                                               target="_blank" v-html="item.data[key].ttl"></a>
+                                            <template v-else>
+                                                <template v-if="getAsterisks(item.data[key].ttl)">
+                                                    <app-asterisks></app-asterisks>
+                                                </template>
+                                                <slot v-else name="field" :field="key" :value="item.data[key].ttl"
+                                                      :row="item.data"><span v-html="item.data[key].ttl"></span></slot>
+                                            </template>
+                                            <div class="small" v-if="item.data[key].info"
+                                                 v-html="item.data[key].info"></div>
+                                        </template>
+                                        <template v-else>
+                                            <template v-if="getAsterisks(item.data[key])">
+                                                <app-asterisks
+                                                    :message="getAsterisksMessage(item.data[key])"></app-asterisks>
+                                            </template>
+                                            <slot v-else name="field" :field="key"
+                                                  :value="filterLength(item.data[key], key)" :row="item.data">
+                                                <span v-html="filterLength(item.data[key], key)"></span>
+                                            </slot>
+                                        </template>
+                                        <template
+                                            v-if="filterLength(item.data[key], key).length > 80 && arrow_adaptive">
+                                            <div class="showMore clear top_5">
+                                                <a href="javascript:void(0);" class="small"
+                                                   v-on:click.prevent="setFullDescrTableMobile(item.data[key])">{{label_show_more}}</a>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </td>
+                                <template v-if="group && showAdaptive && !next && !prev && substrings.length > 0">
+                                    <td v-if="substrings[index] != ''">
+                                        <template v-if="getAsterisks(substrings[index])">
+                                            <app-asterisks></app-asterisks>
+                                        </template>
+                                        <template v-else>
+                                            <div v-bind:style="{height: heightB[index]}"
+                                                 v-html="substrings[index]"></div>
+                                        </template>
+                                    </td>
+                                    <td v-else>
+                                        <div v-bind:style="{height: heightB[index]}">&nbsp;</div>
+                                    </td>
+                                </template>
+                            </tr>
                         </template>
                         <template v-else>
-                            <td v-bind:colspan="colspan" class="small_txt 2" v-html="prestrings[index]"></td>
+                            <tr :id="table_name + '_scroll_item_' + index" :key="'trScrollBody' + index"
+                                v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]"
+                                v-if="showPreviousElements(index)" ref="trScrollBody" v-show="showTr(item.show)"
+                                v-on:click="setActiveColor(item)">
+                                <td v-if="number && !showAdaptive">{{index + 1}}</td>
+                                <td v-bind:class="{center_txt:arrow_adaptive}" v-if="!showAdaptive">
+                                    <div v-bind:style="{width: width, height: heightB[0]}">
+                                        <template
+                                            v-if="!!item.data[columns[0]] && typeof(item.data[columns[0]]) === 'object'">
+                                            <a v-if="item.data[columns[0]].lnk" v-bind:href="item.data[columns[0]].lnk"
+                                               target="_blank" v-html="item.data[columns[0]].ttl"></a>
+                                            <template v-else>
+                                                <template v-if="getAsterisks(item.data[columns[0]].ttl)">
+                                                    <app-asterisks></app-asterisks>
+                                                </template>
+                                                <slot v-else name="field" :field="columns[0]"
+                                                      :value="item.data[columns[0]].ttl" :row="item.data"><span
+                                                    v-html="item.data[columns[0]].ttl"></span></slot>
+                                            </template>
+                                            <div class="small" v-if="item.data[columns[0]].info"
+                                                 v-html="item.data[columns[0]].info"></div>
+                                        </template>
+                                        <template v-else>
+                                            <template v-if="getAsterisks(item.data[columns[0]])">
+                                                <app-asterisks
+                                                    :message="getAsterisksMessage(item.data[columns[0]])"></app-asterisks>
+                                            </template>
+                                            <slot v-else name="field" :field="columns[0]" :value="item.data[columns[0]]"
+                                                  :row="item.data"><span v-html="item.data[columns[0]]"></span></slot>
+                                        </template>
+                                    </div>
+                                </td>
+                                <td v-for="(key, indexInner) in columns"
+                                    v-bind:class="[(arrow_adaptive ? 'center_txt' : ''), 'field_' + key]"
+                                    v-if="indexInner > 0">
+                                    <div v-bind:style="{width: width, height: heightB[index]}"
+                                         v-bind:title="getTitle(item.data[key])">
+                                        <template v-if="!!item.data[key] && typeof(item.data[key]) === 'object'">
+                                            <a v-if="item.data[key].lnk" v-bind:href="item.data[key].lnk"
+                                               target="_blank" v-html="item.data[key].ttl"></a>
+                                            <template v-else>
+                                                <template v-if="getAsterisks(item.data[key].ttl)">
+                                                    <app-asterisks></app-asterisks>
+                                                </template>
+                                                <slot v-else name="field" :field="key" :value="item.data[key].ttl"
+                                                      :row="item.data"><span v-html="item.data[key].ttl"></span></slot>
+                                            </template>
+                                            <div class="small" v-if="item.data[key].info"
+                                                 v-html="item.data[key].info"></div>
+                                        </template>
+                                        <template v-else>
+                                            <template v-if="getAsterisks(item.data[key])">
+                                                <app-asterisks
+                                                    :message="getAsterisksMessage(item.data[key])"></app-asterisks>
+                                            </template>
+                                            <slot v-else name="field" :field="key"
+                                                  :value="filterLength(item.data[key], key)" :row="item.data">
+                                                <span v-html="filterLength(item.data[key], key)"></span>
+                                            </slot>
+                                        </template>
+                                        <template
+                                            v-if="filterLength(item.data[key], key).length > 80 && arrow_adaptive">
+                                            <div class="showMore clear top_5">
+                                                <a href="javascript:void(0);" class="small"
+                                                   v-on:click.prevent="setFullDescrTableMobile(item.data[key])">{{label_show_more}}</a>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </td>
+                                <template v-if="group && showAdaptive && !next && !prev && substrings.length > 0">
+                                    <td v-if="substrings[index] != ''">
+                                        <template v-if="getAsterisks(substrings[index])">
+                                            <app-asterisks></app-asterisks>
+                                        </template>
+                                        <template v-else>
+                                            <div v-bind:style="{height: heightB[index]}">
+                                                <span v-html="filterLength(substrings[index])"></span>
+                                                <div class="showMore clear top_5">
+                                                    <a href="javascript:void(0);" class="small"
+                                                       v-on:click.prevent="setFullDescrTableMobile(substrings[index])">{{label_show_more}}</a>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </td>
+                                    <td v-else>
+                                        <div v-bind:style="{height: heightB[index]}">&nbsp;</div>
+                                    </td>
+                                </template>
+                            </tr>
+                            <tr v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]"
+                                v-if="group && !showAdaptive && showPreviousElements(index)" ref="trScrollBody"
+                                v-show="showTr(item.show)" v-on:click="setActiveColor(item)">
+                                <template v-if="getAsterisks(substrings[index])">
+                                    <td v-bind:colspan="colspan" class="small_txt">
+                                        <app-asterisks></app-asterisks>
+                                    </td>
+                                </template>
+                                <template v-else>
+                                    <td v-bind:colspan="colspan" class="small_txt" v-html="substrings[index]"></td>
+                                </template>
+                            </tr>
                         </template>
-                    </tr>
-                    <tr v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]" v-if="prestrings[index] && showAdaptive"  v-on:click="setActiveColor(item)">
-                        <template v-if="collapse">
-                            <td v-bind:colspan="colspan" class="group_tr" v-if="columns.length > 1">
-                                <div v-bind:style="{width: width, height: heightBP[index]}"></div>
-                            </td>
-                        </template>
-                        <template v-else>
+                    </template>
+                    <template v-else>
+                        <tr v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]"
+                            v-on:click="setActiveColor(item)" v-if="prestrings[index] && !showAdaptive">
+                            <template v-if="getAsterisks(prestrings[index])">
+                                <td v-bind:colspan="colspan" class="small_txt">
+                                    <app-asterisks></app-asterisks>
+                                </td>
+                            </template>
+                            <template v-else>
+                                <td v-bind:colspan="colspan" class="small_txt" v-html="prestrings[index]"></td>
+                            </template>
+                        </tr>
+                        <tr v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]"
+                            v-on:click="setActiveColor(item)" v-if="prestrings[index] && showAdaptive">
                             <td v-bind:colspan="colspan" class="small_txt">
                                 <div v-bind:style="{width: width, height: heightBP[index]}"></div>
                             </td>
-                        </template>
-                    </tr>
-                    <template v-if="collapse">
-                        <tr :id="table_name + '_scroll_item_' + index" :key="'trScrollBody' + index" v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]" v-if="showPreviousElements(index)" ref="trScrollBody" v-show="showTr(item.show)  && item.show_group" v-on:click="setActiveColor(item)">
+                        </tr>
+                        <tr :id="table_name + '_scroll_item_' + index" :key="'trScrollBody' + index"
+                            v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]"
+                            v-if="showPreviousElements(index)" ref="trScrollBody" v-show="showTr(item.show) && show_tr"
+                            v-on:click="setActiveColor(item)">
                             <td v-if="number && !showAdaptive">{{index + 1}}</td>
                             <td v-bind:class="{center_txt:arrow_adaptive}" v-if="!showAdaptive">
                                 <div v-bind:style="{width: width, height: heightB[0]}">
-                                    <template v-if="!!item.data[columns[0]] && typeof(item.data[columns[0]]) === 'object'">
-                                        <a v-if="item.data[columns[0]].lnk" v-bind:href="item.data[columns[0]].lnk" target="_blank" v-html="item.data[columns[0]].ttl"></a>
+                                    <template
+                                        v-if="!!item.data[columns[0]] && typeof(item.data[columns[0]]) === 'object'">
+                                        <a v-if="item.data[columns[0]].lnk" v-bind:href="item.data[columns[0]].lnk"
+                                           target="_blank" v-html="item.data[columns[0]].ttl"></a>
                                         <template v-else>
                                             <template v-if="getAsterisks(item.data[columns[0]].ttl)">
                                                 <app-asterisks></app-asterisks>
                                             </template>
-                                            <slot v-else name="field" :field="columns[0]" :value="item.data[columns[0]].ttl" :row="item.data"><span v-html="item.data[columns[0]].ttl"></span></slot>
+                                            <slot v-else name="field" :field="columns[0]"
+                                                  :value="item.data[columns[0]].ttl" :row="item.data"><span
+                                                v-html="item.data[columns[0]].ttl"></span></slot>
                                         </template>
-                                        <div class="small" v-if="item.data[columns[0]].info" v-html="item.data[columns[0]].info"></div>
+                                        <div class="small" v-if="item.data[columns[0]].info"
+                                             v-html="item.data[columns[0]].info"></div>
                                     </template>
-                                    <template v-else>
-                                        <template v-if="getAsterisks(item.data[columns[0]])">
-                                            <app-asterisks :message="getAsterisksMessage(item.data[columns[0]])"></app-asterisks>
-                                        </template>
-                                        <slot v-else name="field" :field="columns[0]" :value="item.data[columns[0]]" :row="item.data"><span v-html="item.data[columns[0]]"></span></slot>
-                                    </template>
+                                    <slot v-else name="field" :field="columns[0]" :value="item.data[columns[0]]"
+                                          :row="item.data"><span v-html="item.data[columns[0]]"></span></slot>
                                 </div>
                             </td>
-                            <td v-for="(key, indexInner) in columns" v-bind:class="[(arrow_adaptive ? 'center_txt' : ''), 'field_' + key]" v-if="indexInner > 0">
-                                <div v-bind:style="{width: width, height: heightB[index]}" v-bind:title="getTitle(item.data[key])">
+                            <td v-for="(key, indexInner) in columns" :key="'scroll_' + indexInner"
+                                v-bind:class="[(arrow_adaptive ? 'center_txt' : ''), 'field_' + key]"
+                                v-if="indexInner > 0">
+                                <div v-bind:style="{width: width, height: heightB[index]}"
+                                     v-bind:title="getTitle(item.data[key])">
                                     <template v-if="!!item.data[key] && typeof(item.data[key]) === 'object'">
-                                        <a v-if="item.data[key].lnk" v-bind:href="item.data[key].lnk" target="_blank" v-html="item.data[key].ttl"></a>
+                                        <a v-if="item.data[key].lnk" v-bind:href="item.data[key].lnk" target="_blank"
+                                           v-html="item.data[key].ttl"></a>
                                         <template v-else>
                                             <template v-if="getAsterisks(item.data[key].ttl)">
                                                 <app-asterisks></app-asterisks>
                                             </template>
-                                            <slot v-else name="field" :field="key" :value="item.data[key].ttl" :row="item.data"><span v-html="item.data[key].ttl"></span></slot>
+                                            <slot v-else name="field" :field="key" :value="item.data[key].ttl"
+                                                  :row="item.data"><span v-html="item.data[key].ttl"></span></slot>
                                         </template>
-                                        <div class="small" v-if="item.data[key].info" v-html="item.data[key].info"></div>
+                                        <div class="small" v-if="item.data[key].info"
+                                             v-html="item.data[key].info"></div>
                                     </template>
                                     <template v-else>
                                         <template v-if="getAsterisks(item.data[key])">
-                                            <app-asterisks :message="getAsterisksMessage(item.data[key])"></app-asterisks>
+                                            <app-asterisks
+                                                :message="getAsterisksMessage(item.data[key])"></app-asterisks>
                                         </template>
-                                        <slot v-else name="field" :field="key" :value="filterLength(item.data[key], key)" :row="item.data">
+                                        <slot v-else name="field" :field="key"
+                                              :value="filterLength(item.data[key], key)" :row="item.data">
                                             <span v-html="filterLength(item.data[key], key)"></span>
                                         </slot>
                                     </template>
                                     <template v-if="filterLength(item.data[key], key).length > 80 && arrow_adaptive">
                                         <div class="showMore clear top_5">
-                                            <a href="javascript:void(0);" class="small" v-on:click.prevent="setFullDescrTableMobile(item.data[key])">{{label_show_more}}</a>
+                                            <a href="javascript:void(0);" class="small"
+                                               v-on:click.prevent="setFullDescrTableMobile(item.data[key])">{{label_show_more}}</a>
                                         </div>
                                     </template>
                                 </div>
                             </td>
-                            <template v-if="group && showAdaptive && !next && !prev && substrings.length > 0">
+                            <template v-if="group && showAdaptive && substrings.length > 0">
                                 <td v-if="substrings[index] != ''">
                                     <template v-if="getAsterisks(substrings[index])">
                                         <app-asterisks></app-asterisks>
@@ -314,80 +616,18 @@
                                         <div v-bind:style="{height: heightB[index]}" v-html="substrings[index]"></div>
                                     </template>
                                 </td>
-                                <td v-else><div v-bind:style="{height: heightB[index]}">&nbsp;</div></td>
-                            </template>
-                        </tr>
-                    </template>
-                    <template v-else>
-                        <tr :id="table_name + '_scroll_item_' + index" :key="'trScrollBody' + index" v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]" v-if="showPreviousElements(index)" ref="trScrollBody" v-show="showTr(item.show)" v-on:click="setActiveColor(item)">
-                            <td v-if="number && !showAdaptive">{{index + 1}}</td>
-                            <td v-bind:class="{center_txt:arrow_adaptive}" v-if="!showAdaptive">
-                                <div v-bind:style="{width: width, height: heightB[0]}">
-                                    <template v-if="!!item.data[columns[0]] && typeof(item.data[columns[0]]) === 'object'">
-                                        <a v-if="item.data[columns[0]].lnk" v-bind:href="item.data[columns[0]].lnk" target="_blank" v-html="item.data[columns[0]].ttl"></a>
-                                        <template v-else>
-                                            <template v-if="getAsterisks(item.data[columns[0]].ttl)">
-                                                <app-asterisks></app-asterisks>
-                                            </template>
-                                            <slot v-else name="field" :field="columns[0]" :value="item.data[columns[0]].ttl" :row="item.data"><span v-html="item.data[columns[0]].ttl"></span></slot>
-                                        </template>
-                                        <div class="small" v-if="item.data[columns[0]].info" v-html="item.data[columns[0]].info"></div>
-                                    </template>
-                                    <template v-else>
-                                        <template v-if="getAsterisks(item.data[columns[0]])">
-                                            <app-asterisks :message="getAsterisksMessage(item.data[columns[0]])"></app-asterisks>
-                                        </template>
-                                        <slot v-else name="field" :field="columns[0]" :value="item.data[columns[0]]" :row="item.data"><span v-html="item.data[columns[0]]"></span></slot>
-                                    </template>
-                                </div>
-                            </td>
-                            <td v-for="(key, indexInner) in columns" v-bind:class="[(arrow_adaptive ? 'center_txt' : ''), 'field_' + key]" v-if="indexInner > 0">
-                                <div v-bind:style="{width: width, height: heightB[index]}" v-bind:title="getTitle(item.data[key])">
-                                    <template v-if="!!item.data[key] && typeof(item.data[key]) === 'object'">
-                                        <a v-if="item.data[key].lnk" v-bind:href="item.data[key].lnk" target="_blank" v-html="item.data[key].ttl"></a>
-                                        <template v-else>
-                                            <template v-if="getAsterisks(item.data[key].ttl)">
-                                                <app-asterisks></app-asterisks>
-                                            </template>
-                                            <slot v-else name="field" :field="key" :value="item.data[key].ttl" :row="item.data"><span v-html="item.data[key].ttl"></span></slot>
-                                        </template>
-                                        <div class="small" v-if="item.data[key].info" v-html="item.data[key].info"></div>
-                                    </template>
-                                    <template v-else>
-                                        <template v-if="getAsterisks(item.data[key])">
-                                            <app-asterisks :message="getAsterisksMessage(item.data[key])"></app-asterisks>
-                                        </template>
-                                        <slot v-else name="field" :field="key" :value="filterLength(item.data[key], key)" :row="item.data">
-                                            <span v-html="filterLength(item.data[key], key)"></span>
-                                        </slot>
-                                    </template>
-                                    <template v-if="filterLength(item.data[key], key).length > 80 && arrow_adaptive">
-                                        <div class="showMore clear top_5">
-                                            <a href="javascript:void(0);" class="small" v-on:click.prevent="setFullDescrTableMobile(item.data[key])">{{label_show_more}}</a>
-                                        </div>
-                                    </template>
-                                </div>
-                            </td>
-                            <template v-if="group && showAdaptive && !next && !prev && substrings.length > 0">
-                                <td v-if="substrings[index] != ''">
-                                    <template v-if="getAsterisks(substrings[index])">
-                                        <app-asterisks></app-asterisks>
-                                    </template>
-                                    <template v-else>
-                                        <div v-bind:style="{height: heightB[index]}" >
-                                            <span v-html="filterLength(substrings[index])"></span>
-                                            <div class="showMore clear top_5">
-                                                <a href="javascript:void(0);" class="small" v-on:click.prevent="setFullDescrTableMobile(substrings[index])">{{label_show_more}}</a>
-                                            </div>
-                                        </div>
-                                    </template>
+                                <td v-else>
+                                    <div v-bind:style="{height: heightB[index]}">&nbsp;</div>
                                 </td>
-                                <td v-else><div v-bind:style="{height: heightB[index]}">&nbsp;</div></td>
                             </template>
                         </tr>
-                        <tr v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]" v-if="group && !showAdaptive && showPreviousElements(index)" ref="trScrollBody" v-show="showTr(item.show)" v-on:click="setActiveColor(item)">
+                        <tr v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]"
+                            v-if="group && !showAdaptive && showPreviousElements(index)" ref="trScrollBody"
+                            v-show="showTr(item.show)&& index && show_tr" v-on:click="setActiveColor(item)">
                             <template v-if="getAsterisks(substrings[index])">
-                                <td v-bind:colspan="colspan" class="small_txt"><app-asterisks></app-asterisks></td>
+                                <td v-bind:colspan="colspan" class="small_txt">
+                                    <app-asterisks></app-asterisks>
+                                </td>
                             </template>
                             <template v-else>
                                 <td v-bind:colspan="colspan" class="small_txt" v-html="substrings[index]"></td>
@@ -395,94 +635,20 @@
                         </tr>
                     </template>
                 </template>
-                <template v-else>
-                    <tr v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]" v-on:click="setActiveColor(item)" v-if="prestrings[index] && !showAdaptive">
-                        <template v-if="getAsterisks(prestrings[index])">
-                            <td v-bind:colspan="colspan" class="small_txt"><app-asterisks></app-asterisks></td>
-                        </template>
-                        <template v-else>
-                            <td v-bind:colspan="colspan" class="small_txt" v-html="prestrings[index]"></td>
-                        </template>
-                    </tr>
-                    <tr v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]" v-on:click="setActiveColor(item)" v-if="prestrings[index] && showAdaptive">
-                        <td v-bind:colspan="colspan" class="small_txt">
-                            <div v-bind:style="{width: width, height: heightBP[index]}"></div>
-                        </td>
-                    </tr>
-                    <tr :id="table_name + '_scroll_item_' + index" :key="'trScrollBody' + index" v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]" v-if="showPreviousElements(index)" ref="trScrollBody" v-show="showTr(item.show) && show_tr" v-on:click="setActiveColor(item)">
-                        <td v-if="number && !showAdaptive">{{index + 1}}</td>
-                        <td v-bind:class="{center_txt:arrow_adaptive}" v-if="!showAdaptive">
-                            <div v-bind:style="{width: width, height: heightB[0]}">
-                                <template v-if="!!item.data[columns[0]] && typeof(item.data[columns[0]]) === 'object'">
-                                    <a v-if="item.data[columns[0]].lnk" v-bind:href="item.data[columns[0]].lnk" target="_blank" v-html="item.data[columns[0]].ttl"></a>
-                                    <template v-else>
-                                        <template v-if="getAsterisks(item.data[columns[0]].ttl)">
-                                            <app-asterisks></app-asterisks>
-                                        </template>
-                                        <slot v-else name="field" :field="columns[0]" :value="item.data[columns[0]].ttl" :row="item.data"><span v-html="item.data[columns[0]].ttl"></span></slot>
-                                    </template>
-                                    <div class="small" v-if="item.data[columns[0]].info" v-html="item.data[columns[0]].info"></div>
-                                </template>
-                                <slot v-else name="field" :field="columns[0]" :value="item.data[columns[0]]" :row="item.data"><span v-html="item.data[columns[0]]"></span></slot>
-                            </div>
-                        </td>
-                        <td v-for="(key, indexInner) in columns" :key="'scroll_' + indexInner" v-bind:class="[(arrow_adaptive ? 'center_txt' : ''), 'field_' + key]" v-if="indexInner > 0">
-                            <div v-bind:style="{width: width, height: heightB[index]}" v-bind:title="getTitle(item.data[key])">
-                                <template v-if="!!item.data[key] && typeof(item.data[key]) === 'object'">
-                                    <a v-if="item.data[key].lnk" v-bind:href="item.data[key].lnk" target="_blank" v-html="item.data[key].ttl"></a>
-                                    <template v-else>
-                                        <template v-if="getAsterisks(item.data[key].ttl)">
-                                            <app-asterisks></app-asterisks>
-                                        </template>
-                                        <slot v-else name="field" :field="key" :value="item.data[key].ttl" :row="item.data"><span v-html="item.data[key].ttl"></span></slot>
-                                    </template>
-                                    <div class="small" v-if="item.data[key].info" v-html="item.data[key].info"></div>
-                                </template>
-                                <template v-else>
-                                    <template v-if="getAsterisks(item.data[key])">
-                                        <app-asterisks :message="getAsterisksMessage(item.data[key])"></app-asterisks>
-                                    </template>
-                                    <slot v-else name="field" :field="key" :value="filterLength(item.data[key], key)" :row="item.data">
-                                        <span v-html="filterLength(item.data[key], key)"></span>
-                                    </slot>
-                                </template>
-                                <template v-if="filterLength(item.data[key], key).length > 80 && arrow_adaptive">
-                                    <div class="showMore clear top_5">
-                                        <a href="javascript:void(0);" class="small" v-on:click.prevent="setFullDescrTableMobile(item.data[key])">{{label_show_more}}</a>
-                                    </div>
-                                </template>
-                            </div>
-                        </td>
-                        <template v-if="group && showAdaptive && substrings.length > 0">
-                            <td v-if="substrings[index] != ''">
-                                <template v-if="getAsterisks(substrings[index])">
-                                    <app-asterisks></app-asterisks>
-                                </template>
-                                <template v-else>
-                                    <div v-bind:style="{height: heightB[index]}" v-html="substrings[index]"></div>
-                                </template>
-                            </td>
-                            <td v-else><div v-bind:style="{height: heightB[index]}">&nbsp;</div></td>
-                        </template>
-                    </tr>
-                    <tr v-bind:class="[item.class, getOdd(index), {click_color: activeClickRow == item ? true : false}]" v-if="group && !showAdaptive && showPreviousElements(index)" ref="trScrollBody" v-show="showTr(item.show)&& index && show_tr" v-on:click="setActiveColor(item)">
-                        <template v-if="getAsterisks(substrings[index])"><td v-bind:colspan="colspan" class="small_txt"><app-asterisks></app-asterisks></td></template>
-                        <template v-else><td v-bind:colspan="colspan" class="small_txt" v-html="substrings[index]"></td></template>
-                    </tr>
-                </template>
-            </template>
-            <tr v-show="next" class="openOther">
-                <td v-bind:colspan="colspan" class="center_txt">
-                    <div v-bind:style="{height: heightBGNx}">
-                        <a href="javascript:void(0);" v-on:click="showNext" v-bind:class="{show_hide_block:!nextInner, hide_hide_block:nextInner}" v-if="!showAdaptive">
-                            <template v-if="!nextInner">{{ getLabel('link_show_nexts') }}</template>
-                            <template v-if="nextInner">{{ getLabel('hide') }}</template>
-                        </a>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                <tr v-show="next" class="openOther">
+                    <td v-bind:colspan="colspan" class="center_txt">
+                        <div v-bind:style="{height: heightBGNx}">
+                            <a href="javascript:void(0);" v-on:click="showNext"
+                               v-bind:class="{show_hide_block:!nextInner, hide_hide_block:nextInner}"
+                               v-if="!showAdaptive">
+                                <template v-if="!nextInner">{{ getLabel('link_show_nexts') }}</template>
+                                <template v-if="nextInner">{{ getLabel('hide') }}</template>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
         <div class="clear"></div>
         <div class="top_20" v-if="limit != 0 && limit < data.length">
@@ -517,27 +683,81 @@
             table_class: {default: '', type: String}, // класс таблицы
             number: {default: false, type: Boolean}, // флаг того что в первой ячейке порядковый номер
             group: {default: false, type: Boolean},
+            auth: {default: false, type: Boolean},// проверка авторизации
             collapse: {default: false, type: Boolean},
-            labels: {type: Object, default: function () { return {} }}, // ассоц массив лейблов
+            labels: {
+                type: Object, default: function () {
+                    return {}
+                }
+            }, // ассоц массив лейблов
+            sum: {
+                type: Object, default: function () {
+                    return {}
+                }
+            }, // объект результатов
             column_order: {default: false, type: Boolean}, // флаг фиксировать заголовок таблицы
             fixed_head: {default: false, type: Boolean}, // флаг фиксировать заголовок таблицы
-            fields: {type: Array, default: function () { return [] }}, // список колонок
-            data: {type: Array, default: function () { return [] }}, // данные таблицы
-            data_ext: {type: Array, default: function () { return [] }}, // данные таблицы в расширенном формате
-            fields_labels: {type: Object, default: function () { return {} }}, // список лейблов для колонок
-            fields_classes: {type: Object, default: function () { return {} }}, // список классов для колонок
+            fields: {
+                type: Array, default: function () {
+                    return []
+                }
+            }, // список колонок
+            data: {
+                type: Array, default: function () {
+                    return []
+                }
+            }, // данные таблицы
+            data_ext: {
+                type: Array, default: function () {
+                    return []
+                }
+            }, // данные таблицы в расширенном формате
+            fields_labels: {
+                type: Object, default: function () {
+                    return {}
+                }
+            }, // список лейблов для колонок
+            fields_classes: {
+                type: Object, default: function () {
+                    return {}
+                }
+            }, // список классов для колонок
             fields_labels_prefix: {type: String, default: ''}, // префикс лейблов для полей при автоматической подстановке (если не задан массив fields_labels)
-            field_customize: {type: Function, default: function (field, row) { return row[field]; }}, // кастомная функция форматирования поля
+            field_customize: {
+                type: Function, default: function (field, row) {
+                    return row[field];
+                }
+            }, // кастомная функция форматирования поля
             no_hidden_empty_cols: {type: Boolean, default: false}, // флаг не скрывать пустые столбцы
-            never_hidden_empty_cols_list: { type: Array, default: () => [] }, // флаг не скрывать пустые столбцы
-            sort_fields: {default: function () { return [] },type: Array,}, // поля для которых будет добавлено управление сортировкой
-            sort: {default: '',type: String}, // поле сортировки по умолчанию
-            order: {default: '',type: String}, // направление сортировки по умолчанию (asc/desc)
+            never_hidden_empty_cols_list: {type: Array, default: () => []}, // флаг не скрывать пустые столбцы
+            sort_fields: {
+                default: function () {
+                    return []
+                }, type: Array,
+            }, // поля для которых будет добавлено управление сортировкой
+            sort: {default: '', type: String}, // поле сортировки по умолчанию
+            order: {default: '', type: String}, // направление сортировки по умолчанию (asc/desc)
             need_arrows: {default: false, type: Boolean},
-            arrows_names: {type: Object, default: function () { return {} }}, // неименования стрелок
-            substrings: {type: Array, default: function () { return [] }}, // подстроки
-            show_elements: {type: Array, default() { return [] }}, // подстроки
-            prestrings: {type: Array, default: function () { return [] }}, // выводится перед строкой
+            arrows_names: {
+                type: Object, default: function () {
+                    return {}
+                }
+            }, // неименования стрелок
+            substrings: {
+                type: Array, default: function () {
+                    return []
+                }
+            }, // подстроки
+            show_elements: {
+                type: Array, default() {
+                    return []
+                }
+            }, // подстроки
+            prestrings: {
+                type: Array, default: function () {
+                    return []
+                }
+            }, // выводится перед строкой
             reduction: {default: true, type: Boolean}
         },
         data: function () {
@@ -668,6 +888,17 @@
                         }
                     }
                 }
+
+                dataExt[dataExt.length] = ({
+                    data: {
+                        name: 'Итого',
+                        param1: self.field_customize('param1', this.sum),
+                        param2: self.field_customize('param2', this.sum),
+                        param3: self.field_customize('param3', this.sum),
+                    }
+                });
+                this.innerLimit++;
+
                 return dataExt;
             },
             heightH: function () {
@@ -682,14 +913,14 @@
             heightBGNx: function () {
                 return this.heightBodyGroupNx;
             },
-            width: function(){
-                if(this.widthDiv == '')
+            width: function () {
+                if (this.widthDiv == '')
                     return '';
                 else
                     return this.widthDiv + 'px';
             },
-            widthScreen: function(){
-                if(this.widthTd == '')
+            widthScreen: function () {
+                if (this.widthTd == '')
                     return '';
                 else
                     return this.widthTd + 'px';
@@ -733,8 +964,9 @@
             self.$refs.table_wrapper.addEventListener('scroll', self.scrollTable);
             self.getWindowWidth();
         },
+
         created: function () {
-            if(this.collapse) {
+            if (this.collapse) {
                 let self = this;
                 this.body.forEach(function (item) {
                     self.$set(item, 'show_group', true)
@@ -745,41 +977,42 @@
             this.$resizeTable.$on('refreshTable', this.getWindowWidth, scroll);
 
             this.colspan = this.columns.length;
-            if(this.number)
+            if (this.number)
                 ++this.colspan;
         },
         methods: {
-            setActiveColor: function(item){
+
+            setActiveColor: function (item) {
                 this.activeClickRow = item;
                 console.log(this.activeClickRow == item);
             },
-            getTitle: function(item){
-                if(typeof(item) === 'object')
+            getTitle: function (item) {
+                if (typeof (item) === 'object')
                     return item;
-                if(!/app-asterisks/.test(item))
+                if (!/app-asterisks/.test(item))
                     return item;
                 else
                     return '';
             },
-            setFullDescrTableMobile: function(item){
+            setFullDescrTableMobile: function (item) {
                 this.textFullDescrTableMobile = item;
                 this.showFullDescrTableMobile = true;
             },
-            scrollTable: function(){
+            scrollTable: function () {
                 this.$refs.fixedHeadTableRight.scrollLeft = this.$refs.table_wrapper.scrollLeft;
             },
-            switchGroupList: function(index){
+            switchGroupList: function (index) {
                 let self = this,
                     group_param = '';
-                for(let i = 0; i < self.prestrings.length; i++) {
-                    if(i == index || self.body[i].data.subregion_id == group_param){
+                for (let i = 0; i < self.prestrings.length; i++) {
+                    if (i == index || self.body[i].data.subregion_id == group_param) {
                         group_param = self.body[i].data.subregion_id;
                         self.$set(self.body[i], 'show_group', !self.body[i].show_group);
                     }
                 }
                 this.getWindowWidth();
             },
-            switchTr: function(){
+            switchTr: function () {
                 this.show_tr = !this.show_tr;
                 this.$nextTick(function () {
                     this.getWindowWidth();
@@ -790,16 +1023,15 @@
                     return false;
                 return true;
             },
-            scrollPage: function(){
+            scrollPage: function () {
                 let top = this.$refs.table_wrapper.getBoundingClientRect().top;
                 if (top < 0 && top > this.tableHB) {
                     this.fixedThead = true;
                     this.$refs.fixedHeadTableRight.scrollLeft = this.$refs.table_wrapper.scrollLeft;
-                }
-                else
+                } else
                     this.fixedThead = false;
             },
-            startScrollR: function(){
+            startScrollR: function () {
                 this.stopScroll();
                 let self = this,
                     element = self.$refs.table_wrapper,
@@ -808,22 +1040,21 @@
 
                 self.arrow_screen_left = true;
                 this.timerRight = setInterval(function () {
-                    v+=5;
+                    v += 5;
                     if (v > self.maxScrollTable) {
                         self.arrow_screen_right = false;
                         element.scrollLeft = self.maxScrollTable;
                         element2.scrollLeft = self.maxScrollTable;
                         clearTimeout(self.timerRight);
                         return;
-                    }
-                    else{
+                    } else {
                         element.scrollLeft = v;
-                        if(self.fixedThead)
+                        if (self.fixedThead)
                             element2.scrollLeft = v;
                     }
                 }, 1);
             },
-            startScrollL: function(){
+            startScrollL: function () {
                 this.stopScroll();
                 let self = this,
                     element = self.$refs.table_wrapper,
@@ -832,38 +1063,37 @@
 
                 self.arrow_screen_right = true;
                 this.timerLeft = setInterval(function () {
-                    v-=5;
+                    v -= 5;
                     if (v < 5) {
                         self.arrow_screen_left = false;
                         element.scrollLeft = 0;
                         element2.scrollLeft = 0;
                         clearTimeout(self.timerLeft);
                         return;
-                    }
-                    else{
+                    } else {
                         element.scrollLeft = v;
-                        if(self.fixedThead)
+                        if (self.fixedThead)
                             element2.scrollLeft = v;
                     }
                 }, 1);
             },
-            stopScroll: function(){
+            stopScroll: function () {
                 clearTimeout(this.timerLeft);
                 clearTimeout(this.timerRight);
             },
-            scrollTableRight: function() {
-                if(this.index < this.countActiveColumn) {
+            scrollTableRight: function () {
+                if (this.index < this.countActiveColumn) {
                     this.index++;
                     this.indent = this.indent - this.widthTd;
                 }
             },
-            scrollTableLeft: function() {
-                if(this.index > 1) {
+            scrollTableLeft: function () {
+                if (this.index > 1) {
                     this.index--;
                     this.indent = this.indent + this.widthTd;
                 }
             },
-            getWindowWidth: function(scroll = true) {
+            getWindowWidth: function (scroll = true) {
                 var self = this;
 
                 self.heightHead = '';
@@ -877,7 +1107,7 @@
                 self.$refs.table_wrapper.scrollLeft = 0;
                 self.maxScrollTable = self.$refs.table_scroll.clientWidth - self.$refs.table_wrapper.clientWidth;
 
-                if(self.widthOld != window.innerWidth) {
+                if (self.widthOld != window.innerWidth) {
                     self.index = 1;
                     self.indent = 0;
                     self.widthOld = window.innerWidth;
@@ -889,8 +1119,7 @@
                     self.arrow_screen = false;
                     self.widthTd = parseInt(self.$refs.tableCntrl.clientWidth / 2);
                     self.widthDiv = self.widthTd - 10;
-                }
-                else {
+                } else {
                     self.widthTd = '';
                     self.widthDiv = '';
                     self.widthTable = '';
@@ -901,8 +1130,7 @@
                         self.arrow_screen = true;
                         self.arrow_screen_right = true;
                         self.showAdaptive = true;
-                    }
-                    else {
+                    } else {
                         self.arrow_screen = false;
                         self.showAdaptive = false;
                     }
@@ -914,8 +1142,7 @@
                         if (!!self.$refs.table_scroll.clientWidth && !!self.$refs.table_wrapper.clientWidth && self.$refs.table_scroll.clientWidth > self.$refs.table_wrapper.clientWidth) {
                             self.arrow_screen = true;
                             self.showAdaptive = true;
-                        }
-                        else {
+                        } else {
                             self.arrow_screen = false;
                             self.showAdaptive = false;
                         }
@@ -958,7 +1185,7 @@
 
                         let iPre = 0;
 
-                       for (let i = 0; i < self.lengthFixed; ++i) {
+                        for (let i = 0; i < self.lengthFixed; ++i) {
                             let fixed = document.getElementById(self.table_name + '_fixed_item_' + i),
                                 scroll = document.getElementById(self.table_name + '_scroll_item_' + i);
 
@@ -988,7 +1215,7 @@
                         if (self.next && !!self.$refs.trFixedBodyGroup)
                             self.height_body += self.$refs.trFixedBodyGroup.clientHeight + 2;
 
-                        if(self.height_body > window.innerHeight)
+                        if (self.height_body > window.innerHeight)
                             self.arrow_multy = true;
                         else
                             self.arrow_multy = false;
@@ -1005,15 +1232,15 @@
                 });
             },
             getOdd: function (i) {
-                if (i%2 == 0)
+                if (i % 2 == 0)
                     return 'odd';
                 else
                     return 'even';
             },
-            showTr: function(status){
-                if(status == 'prev')
+            showTr: function (status) {
+                if (status == 'prev')
                     return this.prevInner;
-                else if(status == 'next')
+                else if (status == 'next')
                     return this.nextInner;
                 else
                     return true;
@@ -1039,15 +1266,15 @@
             getLabel: function (label) {
                 var caption = '{{' + label + '}}';
 
-                if (typeof(this.labels[label]) !== 'undefined' )
+                if (typeof (this.labels[label]) !== 'undefined')
                     caption = this.labels[label];
 
                 return caption;
             },
-            sortByField: function(field) {
+            sortByField: function (field) {
                 if (field == this.sort_field && this.sort_order == 'asc')
                     this.sort_order = 'desc';
-                else if(field == this.sort_field && this.sort_order == 'desc') {
+                else if (field == this.sort_field && this.sort_order == 'desc') {
                     this.sort_field = '';
                     this.sort_order = '';
                 } else {
@@ -1056,35 +1283,32 @@
                 }
                 this.$eventHub.$emit('sortChange', {'field': this.sort_field, 'order': this.sort_order});
             },
-            filterLength: function(item, key){
+            filterLength: function (item, key) {
                 if (item == null) {
                     return '';
                 }
                 if (key != 'comment' && this.reduction) {
                     if (item != null) {
-                        if (typeof(item) == 'string' && item.replace(/<\/?[^>]+>/gi, '').length > 80)
+                        if (typeof (item) == 'string' && item.replace(/<\/?[^>]+>/gi, '').length > 80)
                             return item.replace(/<\/?[^>]+>/gi, '').substring(0, 80) + '...';
                         else
                             return item;
-                    }
-                    else
+                    } else
                         return '';
-                }
-                else
+                } else
                     return item;
             },
             getAsterisks: function (item) {
-                if (typeof(item) != undefined) {
+                if (typeof (item) != undefined) {
                     if (String(item).indexOf('asterisks') != -1)
                         return true;
                     else
                         return false;
-                }
-                else
+                } else
                     return false;
             },
             getAsterisksMessage: function (item) {
-                if (typeof(item) != undefined) {
+                if (typeof (item) != undefined) {
                     if (String(item).includes('forbidden_request'))
                         return 'forbidden_request_label';
                     if (String(item).includes('already_send_request'))
@@ -1103,12 +1327,14 @@
     }
 </script>
 <style scoped>
-    .table tbody .odd{
-        background-color: #f7f7f7 ;
+    .table tbody .odd {
+        background-color: #f7f7f7;
     }
-    .table tbody .even{
-        background-color: #ffffff ;
+
+    .table tbody .even {
+        background-color: #ffffff;
     }
+
     .field_subregion_name {
         white-space: nowrap;
     }

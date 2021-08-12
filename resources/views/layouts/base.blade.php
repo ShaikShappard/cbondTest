@@ -21,11 +21,14 @@
                     <li class="main_item">
                         <a href="{{ route('index') }}" class="item">Главная</a>
                     </li>
+
                     @if (empty($auth))
-                    <li class="main_item">
+                    <li class="main_item" >
                         <a href="{{ route('auth') }}" class="item">Вы неавторизованы [Войти]</a>
                     </li>
+                        @{{setAuth(false)}}
                     @else
+                        @{{setAuth(true)}}
                     <li class="main_item auth">
                         <a href="{{ route('logout') }}" class="item">Вы авторизованы [Выйти]</a>
                     </li>

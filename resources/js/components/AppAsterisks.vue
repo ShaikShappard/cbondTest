@@ -3,6 +3,9 @@
 </template>
 
 <script>
+
+    import {mapGetters} from 'vuex'
+
     export default {
         name: "AppAsterisks",
         props: {
@@ -15,7 +18,7 @@
             }
         },
         created: function () {
-            if(userAccessLevel == 0) {
+            if(!this.authCheck) {
                 if (typeof (labels.asterisks) != "undefined")
                     this.asterisks = labels.asterisks;
             }
@@ -27,8 +30,13 @@
                 this.asterisks = typeof (labels[this.message]) !== 'undefined' ? labels[this.message] : this.message;
             }
         },
-        computed: {},
-        methods: {},
+        computed: {
+            ...mapGetters({
+                authCheck: 'authCheck',
+            }),
+        },
+        methods: {
+        },
         destroyed: function () {}
     }
 </script>
